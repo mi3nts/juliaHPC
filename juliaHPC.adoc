@@ -1,0 +1,118 @@
+= Julia Programming Language
+Julia is a programming language that appears to be gaining increasing popularity among many scientific communities. When programming for scientific purposes, scientists typically use general programming languages such as Fortran, C/C++, Java, Swift, C#, Go, JavaScript, Python, or mathematical programming alternatives like MATLAB/Octave, R, or Maple. When choosing between these languages, ease of use and runtime must be considered. It is common for all these languages to fall on either extreme ends of the learning spectrum, either being easy to learn but slow, or at the other end being harder to learn but with faster run times. Julia sits much better in the middle, being both easy to learn and providing superior runtimes.  
+
+The JIT compilation, implemented using LLVM, enables Julia to accomplish this by allowing optional typing, multiple dispatch, and type inference. In addition, Julia is a multiparadigm programming language that combines imperative, functional, and object-oriented features. Consequently, Julia is considered a scientific programming language and is well suited for statistics, machine learning, data science, as well as for light and heavy numerical computations.
+
+== The Use of Julia on Europa (HPC Systems)
+
+Julia can be used and variety of means on Europa. 
+
+=== Using Pre Installed Modules 
+The simplest means is by loading a module which is pre installed on Europa. Users can configure their environments using modules, which are cross-compiled across a number of different compilers, giving the HPC cluster great flexibility. However when using a pre installed module,users are limited to the Julia versions in which the modules will have available. 
+
+[source,bash]
+----
+$ julia
+-bash: julia: command not found
+$ ml avail julia
+
+--------------------------------------------------------- /opt/ohpc/pub/unpackaged/modulefiles ---------------------------------------------------------
+   julia/1.7.2
+
+$ ml load julia/1.7.2
+$ julia 
+(base) [lhw150030@login-01 ~]$ julia
+               _
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org
+  (_)     | (_) (_)    |
+   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 1.7.2 (2022-02-06)
+ _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
+|__/                   |
+
+julia> 
+----
+
+At this point you have access to the Command Line Version of Julia or the Read Evaluate Print Loop (REPL). To check if everything is working appropprately simple code snippets can  be carried out. 
+
+[source,bash]
+----
+julia> println("Hello World!")
+Hello World!
+
+julia> x= 1+2
+3
+----
+*Note: You shouldn't run any significant computations on the login nodes, but it's a great way to make sure everything works.*
+
+=== Installing Julia Binaries.
+It is important to note that you are not restricted to using Julia versions provided by Europa when installing Julia Binaries, which allows you to mitigate any issues that may arise as Julia continues to evolve.
+
+In order to avoid getting multiple versions of Julia if you have followed the previous steps, you should log out and log back in. On your home directory create a Software folder and download the appropriate https://julialang.org/downloads/[julia binaries]. 
+[source,bash]
+----
+$ cd ~
+$ mkdir Software
+$ cd Software/
+$ wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.1-linux-x86_64.tar.gz
+$ tar -xzf julia-1.8.1-linux-x86_64.tar.gz 
+$ ./julia-1.8.1/bin/julia 
+               _
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org
+  (_)     | (_) (_)    |
+   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 1.8.1 (2022-09-06)
+ _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
+|__/                   |
+----
+*Note: It is entirely up to the user to choose where to download the binaries*
+
+Additionally, it is advisable to add Julia's bin folder (with full path) to PATH environment variable, you can edit the ~/.bashrc file. 
+[source,bash]
+----
+export PATH="$PATH:/home/<NET ID>/Software/julia-1.8.1/bin"
+----
+
+=== Julia Packages 
+Depending on where Julia is installed, standard libraries can be found at `/share/julia/base` and `share/julia/stdlib`. Julia's ecosystem is built by external contributors and they are simply available on Github repositories. The package listings can be found https://julialang.org/packages/[here]. 
+
+Julia has an in built package manager `Pkg` which can be used to install any packages written in Julia. This is quite similar to pip package manager on Python. Version control and dependancy management is handled automatically by `Pkg`. Julia also offers a REPL for `Pkg` and this can be accessed entering the ] key on the julia REPL. 
+
+[source,julia]
+----
+(@v1.8) pkg> 
+----
+To install packages the add keyword followed by the package name can be used within `pkg`. The `st` (stands for status) command on the package manager is used to track the current state of the julia environment.
+
+----
+(@v1.8) pkg> st
+Status `~/.julia/environments/v1.8/Project.toml` (empty project)
+(@v1.8) pkg> add Revise
+(@v1.8) pkg> add BenchmarkTools Statistics
+(@v1.8) pkg> st
+Status `~/.julia/environments/v1.8/Project.toml`
+  [6e4b80f9] BenchmarkTools v1.3.1
+  [295af30f] Revise v3.4.0
+  [10745b16] Statistics
+----
+
+To return to back to the Julia REPL, `Ctrl+C` or `Backspace` can be used. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+

@@ -1,3 +1,58 @@
 # Julia Examples on HPC Systems
 
- Most of UT Dallas HPC Systems use https://slurm.schedmd.com/documentation.html[SLURM] work load manager. Following are some of the 
+Most of UT Dallas HPC Systems use https://slurm.schedmd.com/documentation.html[SLURM] work load manager. Following are a set of examples on scheduling julia jobs on HPC Systems. The example scripts can be found at the examples folder. 
+
+
+## Running Serial Jobs 
+
+### Example 1 
+
+Example 1 is a hello world example for Julia (examples/ex_01_hello_world.jl). 
+
+`println("Hello World !")`
+
+The following is a simple slurms script (examples/ex_01_slurm.sh) to run the hello world example. 
+
+```
+#!/bin/bash -l
+
+#SBATCH -J helloWorld                          # Job name
+#SBATCH -o logs/helloWorld.%j.out              # Name of stdout output file (%j expands to jobId)
+#SBATCH -e logs/helloWorld.%j.err              # Error File Name 
+#SBATCH --mail-type=begin                      # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=lhw150030@utdallas.edu     # Where to send mail	
+#SBATCH -N 1                                   # Total number of nodes requested
+#SBATCH -n 1                                   # Total number of mpi tasks requested
+#SBATCH -t 00:01:00                            # Run time (hh:mm:ss) - 1 minute
+
+echo Running on host: `hostname`
+julia ex_01_hello_world.jl
+```
+
+You can run the Julia script by simply submitting the job to the cluster via the following command. 
+
+`sbatch examples/ex_01_slurm.sh`. 
+
+
+Following are the steps you would need to follow to run this example on EUROPA. Make sure t
+```
+ssh [EUROPA_ID]@europa.trecis.cloud
+cd scratch/[EUROPA_ID]
+git clone git@github.com:mi3nts/juliaHPC.git
+cd /scratch/lhw150030/juliaHPC/examples
+# At this point edit the change the email address on the ex_01_slurm.sh to your own one
+sbatch ex_01_slurm.sh
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

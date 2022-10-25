@@ -82,11 +82,13 @@ The job can be easily submittedvia the shell with
 
 `sbatch examples/ex_02_slurm.sh`
 
-## Running Parrelel Jobs 
+## Running Parrelel Jobs via job arrays
+
+Running a script with only one hyperparameter changed can be useful when we need to run multiple jobs with little or no changes. SLURM offers an ideal way to accomplish such tasks by using job arrays. This allows the running of consuming jobs in parallel, thereby saving a considerable amount of time. Job arrays are designed to run the same script under different versions. This is illustrated in Example 3.
 
 
 ### Example 3 
-On this example, we look at a similar approach to that of example 2, but with calculating multiple factorials using job arrays via SLURM. The following example script (examples/ex_03_factorial_function_via_job_arrays.jl) calculates factorials for 7, 8, 9 and 10 where it takes an array index as an arguement from its SLURM counterpart script (examples/ex_03_slurm.sh).
+In this example, we use SLURM to calculate multiple factorials using job arrays similar to example 2. In the following example script (examples/ex_03_factorial_function_via_job_arrays.jl), an array index is taken as an argument from its SLURM counterpart script (examples/ex_03_slurm.sh) to calculate factorials for 7, 8, 9 and 10.
 
 #### ex_03_factorial_function_via_job_arrays.jl
 

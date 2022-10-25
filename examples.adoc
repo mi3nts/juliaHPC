@@ -34,15 +34,18 @@ You can run the Julia script by simply submitting the job to the cluster via the
 `sbatch examples/ex_01_slurm.sh`. 
 
 
-Following are the steps you would need to follow to run this example on EUROPA. Make sure t
+Following are the steps you would need to follow to run this example on EUROPA. 
 ```
 ssh [EUROPA_ID]@europa.trecis.cloud
 cd scratch/[EUROPA_ID]
 git clone git@github.com:mi3nts/juliaHPC.git
-cd /scratch/lhw150030/juliaHPC/examples
+cd /scratch/[EUROPA_ID]/juliaHPC/examples
 # At this point edit the change the email address on the ex_01_slurm.sh to your own one
 sbatch ex_01_slurm.sh
 ```
+
+
+
 
 
 
